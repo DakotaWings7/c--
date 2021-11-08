@@ -34,3 +34,73 @@ int main() {
 }
 
 ----------------------------------------------------------------------------------------------------------------------
+// №19 элементы попарно различны(НЕВЕРНО)
+#include<iostream>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "ru");
+
+	const int n = 3;
+	const int m = 4;
+
+	int arr[n][m];
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			scanf_s("%d", &arr[i][j]);
+		}
+	}
+
+	int	count = 0;
+	bool F = 0;
+	for (int i = 0; i < n; i++) {
+		F = 0;
+		for (int j = 0; j < m - 1; j++) {
+			for (int k = j + 1; k < m; k++) {
+				if (arr[i][j] != arr[i][k]) {
+					F = 1;
+				}
+				else {
+					F = 0;
+					break;
+				}
+			}
+			if (!F)
+				break;
+		}
+		if (F)
+			count += 1;
+	}
+
+
+	for (int i = 0; i < n; i++) {
+		F = 0;
+		for (int j = 0; j < m - 1; j++) {
+			for (int k = i + 1; k < m; k++) {
+				if (arr[i][j] != arr[k][j]) {
+					F = 1;
+				}
+				else {
+					F = 0;
+					break;
+				}
+			}
+			if (!F)
+				break;
+		}
+		if (F)
+			count += 1;
+	}
+
+
+	printf("%d", count);
+}
+/*/for (int i = 0; i < n; i++) {
+	for (int j = 0; j < m; j++) {
+		if (arr[i][j] == arr[i][j + 1])
+			count += 1;
+		break;
+	}
+}
+}*/
