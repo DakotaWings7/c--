@@ -1,0 +1,93 @@
+// убывающая последовательность
+#include<iostream>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "rus");
+	const int len_arr = 6;
+	int arr[len_arr] = { 0 };
+	for (int i = 0; i < len_arr; i++) {
+		scanf_s("%d", &arr[i]);
+	}
+
+	int left, right;
+	bool F = 0;
+
+	for (int i = 0; i < len_arr; i++) {
+		if (arr[i] > 0) {
+			left = i;
+			i = len_arr;
+		}
+	}
+
+	for (int i = 0; i < len_arr; i++) {
+		if (arr[i] > 0) {
+			right = i;
+		}
+	}
+
+	if (right - left <= 2) {
+		printf("Между первым и последним положительными числами нет последовательности");
+	}
+	else 
+		{
+		for (int i = left + 1; i < right - 1; i++) {
+			if (arr[i] > arr[i + 1])
+				F = 1;
+			else
+				F = 0;
+		}
+		if (F)
+			printf("Последовательность убывающая");
+		else
+			printf("Последовательность не убывающая");
+	}
+}
+----------------------------------------------------------------------------------------------------------------------
+// Дана квадратная вещественная матрица n x n
+#include<iostream>	
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "ru");
+	const int n = 3;
+	int arr[n][n] = {0};
+
+	printf("%s" "%d" "%s" "%d" "%s", "Введите двумерный массив размера ", n, "x", n, ":\n");
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			scanf_s("%d", &arr[i][j]);
+		}
+	}
+
+	printf("\n");
+
+	/*for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			printf("%d" "%s", arr[i][j], " ");
+		}
+		printf("\n");
+	}*/
+
+
+	int S1 = 0, S2 = 0, S3 = 0, S4 = 0;
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (i == j)
+				S1 += arr[i][j];
+			if (i + j == 2)
+				S2 += arr[i][j];
+			if (i > j)
+				S3 += arr[i][j];
+			if (i < j)
+				S4 += arr[i][j];
+		}
+	}
+
+	printf("%s" "%d" "%s", "Cумма элементов главной диагонали: ", S1, "\n");
+	printf("%s" "%d" "%s", "Cумма элементов побочной диагонали: ", S2, "\n");
+	printf("%s" "%d" "%s", "Cумма элементов ниже главной диагонали: ", S3, "\n");
+	printf("%s" "%d" "%s", "Cумма элементов выше главной диагонали: ", S4, "\n");
+}
