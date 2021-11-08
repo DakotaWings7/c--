@@ -1,0 +1,21 @@
+// №1 кол-во цифр и их сумма
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "ru");
+	printf("Введите число: ");
+	int number;
+	scanf_s("%d", &number);
+
+	int sum = 0, count = 0, a = number;
+	while (0 < a) {
+		count += 1;
+		sum += a % 10;
+		a /= 10;
+	}
+
+	printf("Количество цифр: " "%d", count);
+	printf("\nСумма цифр:" "%d", sum);
+}
