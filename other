@@ -91,3 +91,39 @@ int main() {
 	printf("%s" "%d" "%s", "Cумма элементов ниже главной диагонали: ", S3, "\n");
 	printf("%s" "%d" "%s", "Cумма элементов выше главной диагонали: ", S4, "\n");
 }
+
+
+----------------------------------------------------------------------------------------------------------------------
+// Значение и индекс ближайшего элемента к M
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "ru");
+	int n, i, M, index, value, difference, min_difference = 999;
+	int* a;
+	printf("Введите число М: ");
+	scanf_s("%d", &M);
+	printf("Введите число n: ");
+	scanf_s("%d", &n);
+
+	a = new int[n];
+	for (i = 0; i < n; i++) {
+		scanf_s("%d", a + i);
+	}
+
+	for (i = 0; i < n; i++) {
+		difference = abs(*(a + i) - M);
+		if(difference < min_difference){
+			index = i;
+			value = *(a + i);
+			min_difference = difference;
+		}
+	}
+
+	printf("%s" "%d" "%s","Индекс ближайшего элемента: ", index, "\n");
+	printf("%s" "%d","Значение ближайшего элемента ", value);
+
+	delete[] a;
+}
