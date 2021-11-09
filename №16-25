@@ -53,15 +53,12 @@ int main() {
 	}
 
 	int	count = 0;
-	bool F = 0;
-	for (int i = 0; i < n; i++) {
-		F = 0;
+	bool F = 1;
+	/*for (int i = 0; i < n; i++) {
+		F = 1;
 		for (int j = 0; j < m - 1; j++) {
 			for (int k = j + 1; k < m; k++) {
-				if (arr[i][j] != arr[i][k]) {
-					F = 1;
-				}
-				else {
+				if (arr[i][j] == arr[i][k]) {
 					F = 0;
 					break;
 				}
@@ -72,16 +69,12 @@ int main() {
 		if (F)
 			count += 1;
 	}
-
-
+	*/
 	for (int i = 0; i < n; i++) {
-		F = 0;
+		F = 1;
 		for (int j = 0; j < m - 1; j++) {
-			for (int k = i + 1; k < m; k++) {
-				if (arr[i][j] != arr[k][j]) {
-					F = 1;
-				}
-				else {
+			for (int k = i + 1; k < n; k++) {
+				if (arr[i][j] == arr[k][j]) {
 					F = 0;
 					break;
 				}
@@ -96,11 +89,3 @@ int main() {
 
 	printf("%d", count);
 }
-/*/for (int i = 0; i < n; i++) {
-	for (int j = 0; j < m; j++) {
-		if (arr[i][j] == arr[i][j + 1])
-			count += 1;
-		break;
-	}
-}
-}*/
