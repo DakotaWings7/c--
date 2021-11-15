@@ -16,7 +16,7 @@ int main() {
 			scanf_s("%d", &arr[i][j]);
 		}
 	}
-	int min_row = 99999, sum = 0, row_number;
+	int min_row = INT_MAX, sum = 0, row_number;
 	int i;
 	for (i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
@@ -34,58 +34,63 @@ int main() {
 }
 
 ----------------------------------------------------------------------------------------------------------------------
-// №19 элементы попарно различны(НЕВЕРНО)
+// №19 элементы попарно различны
 #include<iostream>
 using namespace std;
 
 int main() {
 	setlocale(LC_ALL, "ru");
-
 	const int n = 3;
 	const int m = 4;
-
 	int arr[n][m];
 
 	for (int i = 0; i < n; i++) {
+		printf("%s" "%d" "%s" "%d" "%s", 
+			   "Введите ", i, " строку матрицы, содержащую ",
+			    m," элементов: ");
 		for (int j = 0; j < m; j++) {
 			scanf_s("%d", &arr[i][j]);
 		}
 	}
 
-	int	count = 0;
-	bool F = 1;
-	/*for (int i = 0; i < n; i++) {
-		F = 1;
+	int count1 = 0, count2 = 0;
+	bool F = 0;
+	for (int i = 0; i < n; i++) {  // поиск попарно различных в каждой строке
+		F = 0;
 		for (int j = 0; j < m - 1; j++) {
 			for (int k = j + 1; k < m; k++) {
 				if (arr[i][j] == arr[i][k]) {
 					F = 0;
 					break;
 				}
+				else 
+					F = 1;
 			}
 			if (!F)
 				break;
 		}
-		if (F)
-			count += 1;
+		if(F)
+			count1 += 1;
 	}
-	*/
-	for (int i = 0; i < n; i++) {
-		F = 1;
-		for (int j = 0; j < m - 1; j++) {
-			for (int k = i + 1; k < n; k++) {
-				if (arr[i][j] == arr[k][j]) {
+
+	for (int i = 0; i < m; i++) {	// поиск попарно различных в каждом столбце
+		F = 0;
+		for (int j = 0; j < n - 1; j++) {
+			for (int k = j + 1; k < n; k++) {
+				if (arr[j][i] == arr[k][i]) {
 					F = 0;
 					break;
 				}
+				else
+					F = 1;
 			}
 			if (!F)
 				break;
 		}
 		if (F)
-			count += 1;
+			count2 += 1;
 	}
 
-
-	printf("%d", count);
+	printf("%s" "%d\n", "Количество строк, в которых эл-ты попарно различны: ", count1);
+	printf("%s" "%d",   "Количество столбцов, в которых эл-ты попарно различны: ", count2);
 }
