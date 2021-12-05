@@ -1,4 +1,36 @@
+// №16, ближайший элемент к M
+#include<iostream>
+#include<stdio.h>
+using namespace std;
 
+void Fill_array(int a[], int n) {
+	printf("Заполните массив:\n");
+	for (int i = 0; i < n; i++) {
+		printf("a[%d]= ", i); scanf_s("%d", &a[i]);
+	}
+
+}
+
+void Nearest_element(int a[], int n, int& m, int& diff, int& ind) {
+	for (int i = 0; i < n; i++) {
+		if (abs(a[i] - m) < diff) {
+			ind = i;
+			diff = abs(a[i] - m);
+		}
+	}
+}
+
+int main() {
+	setlocale(LC_ALL, "ru");
+	const int N = 5;
+	int index, difference = INT_MAX;
+	int arr[N], M;
+	Fill_array(arr, N);
+	printf("Введите число M: ");
+	scanf_s("%d", &M);
+	Nearest_element(arr, N, M, difference, index);
+	printf("%d" "%s" "%d", index, " ", arr[index]);
+}
 -------------------------------------------------------------------------------------------------------------------------------------
 // №17 строка с наименьшей суммой элементов
 #include<iostream>
