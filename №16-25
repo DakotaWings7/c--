@@ -22,14 +22,16 @@ void Nearest_element(int a[], int n, int& m, int& diff, int& ind) {
 
 int main() {
 	setlocale(LC_ALL, "ru");
-	const int N = 5;
-	int index, difference = INT_MAX;
-	int arr[N], M;
+	int index, difference = INT_MAX, N, M;
+	printf("Введите размерность массива:\n");
+	scanf_s("%d", &N);
+	int* arr = new int[N];
 	Fill_array(arr, N);
 	printf("Введите число M: ");
 	scanf_s("%d", &M);
 	Nearest_element(arr, N, M, difference, index);
-	printf("%d" "%s" "%d", index, " ", arr[index]);
+	printf("%s" "%d\n" "%s" "%d\n", "Индекс элемента в массиве: ",
+			index, "Значение элемента в массиве: ", arr[index]);
 }
 -------------------------------------------------------------------------------------------------------------------------------------
 // №17 строка с наименьшей суммой элементов
