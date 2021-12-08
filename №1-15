@@ -48,7 +48,6 @@ int main() {
 int main()
 {
 	setlocale(LC_ALL, "rus");
-
 	printf("Введите число n: ");
 	int n, k, M = 1, i = 1;
 	scanf_s("%d", &n);
