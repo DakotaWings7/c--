@@ -212,3 +212,55 @@ int main() {
 	printf("%d", Pal_check(a, n));
 
 }
+------------------------------------------------------------------------------------------------------
+// №13, praktika
+#include<iostream>
+using namespace std;
+
+int** V_data(int n, int m) {
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++)
+		a[i] = new int[m];
+	return a;
+}
+
+int** Fill_array(int** a, int n, int m) {
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++){
+			printf("a[%d][%d] = ", i, j);
+			scanf_s("%d", &a[i][j]);
+		}
+	}
+	return a;
+}
+
+int Print_array(int ** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("a[%d][%d] = ", i, j);
+			printf("%d\n", a[i][j]);
+		}
+	}
+	return 1;
+}
+
+int Array_smoothing(int** a, int** b, int n, int m) {
+	for (int i = 0; i < m - 1; i++) {
+		for (int j = 0; j < n - 1; j++) {
+			b[i][j] = 
+		}
+	}
+	return Print_array(b, n, m);
+}
+
+int main() {
+	setlocale(LC_ALL, "ru");
+	int n = 3, m = 3;
+
+	int** a = V_data(n, m);
+	Fill_array(a, n, m);
+	printf("---------------------------------------------\n");
+	int** b = V_data(n, m);
+
+	Array_smoothing(a, b, n, m);
+}
