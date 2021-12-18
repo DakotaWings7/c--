@@ -1,8 +1,10 @@
-// №16, ближайший элемент к M
-#include<iostream>
-#include<stdio.h>
-using namespace std;
-
+Функции:
+int** memory_allocation(int n, int m) {
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++)
+		a[i] = new int[m];
+	return a;
+}
 void Fill_array(int a[], int n) {
 	printf("Заполните массив:\n");
 	for (int i = 0; i < n; i++) {
@@ -10,6 +12,29 @@ void Fill_array(int a[], int n) {
 	}
 
 }
+int** Fill_array(int** a, int n, int m) {
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++){
+			printf("a[%d][%d] = ", i, j);
+			scanf_s("%d", &a[i][j]);
+		}
+	}
+	return a;
+}
+void Print_array(int ** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("a[%d][%d] = ", i, j);
+			printf("%d\n", a[i][j]);
+		}
+	}
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------
+// №16, ближайший элемент к M
+#include<iostream>
+#include<stdio.h>
+using namespace std;
 
 void Nearest_element(int a[], int n, int& m, int& diff, int& ind) {
 	for (int i = 0; i < n; i++) {
