@@ -12,14 +12,12 @@ void Fill_array(int a[], int n) {
 	}
 
 }
-int** Fill_array(int** a, int n, int m) {
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++){
-			printf("a[%d][%d] = ", i, j);
-			scanf_s("%d", &a[i][j]);
+void Fill_array(int** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			printf("a[%d][%d] = ", i, j); scanf_s("%d", &a[i][j]);
 		}
 	}
-	return a;
 }
 void Print_array(int ** a, int n, int m) {
 	for (int i = 0; i < n; i++) {
@@ -29,7 +27,12 @@ void Print_array(int ** a, int n, int m) {
 		}
 	}
 }
-
+void delete_Array(int** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		delete[] a[i];
+	}
+	delete[] a;
+}
 -------------------------------------------------------------------------------------------------------------------------------------
 // №16, ближайший элемент к M
 #include<iostream>
@@ -46,53 +49,46 @@ void Nearest_element(int a[], int n, int& m, int& diff, int& ind) {
 }
 
 int main() {
-	setlocale(LC_ALL, "ru");
-	int index, difference = INT_MAX, N, M;
-	printf("Введите размерность массива:\n");
-	scanf_s("%d", &N);
+	int index, difference = INT_MAX, N = 4, M;
 	int* arr = new int[N];
 	Fill_array(arr, N);
-	printf("Введите число M: ");
-	scanf_s("%d", &M);
+	printf("Enter M: "); scanf_s("%d", &M);
+	
 	Nearest_element(arr, N, M, difference, index);
-	printf("%s" "%d\n" "%s" "%d\n", "Индекс элемента в массиве: ",
-			index, "Значение элемента в массиве: ", arr[index]);
-	delete [] arr;
+	printf("%d\n" "%d\n", index, arr[index]);
+	
+	delete[] arr;
 }
 -------------------------------------------------------------------------------------------------------------------------------------
 // №17 строка с наименьшей суммой элементов
 #include<iostream>
 using namespace std;
 
-int main() {
-	setlocale(LC_ALL, "ru");
-	const int n = 3;
-	const int m = 4;
+int sum_of_row(int** a, int m, int i, int &sum) {
+	for (int j = 0; j < m; j++)
+		sum += a[i][j];
+	return sum;
+}
 
-	int arr[n][m];
-
-	for (int i = 0; i < n; i++){
-		for (int j = 0; j < m; j++) {
-			scanf_s("%d", &arr[i][j]);
-		}
-	}
-	int min_row = INT_MAX, sum = 0, row_number;
-	int i;
-	for (i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			sum += arr[i][j];
-		}
-		if (sum < min_row){
+void N_17(int** a, int n, int m, int &row_number, int &min_row, int &sum) {
+	for (int i = 0; i < n; i++) {
+		sum = 0;
+		if (sum_of_row(a, m, i, sum) < min_row) {
 			min_row = sum;
 			row_number = i;
 		}
-		sum = 0;
 	}
-
-	
-	printf("%s" "%d" "%s" "%d", "Номер строки с минимальной суммой: ", row_number + 1, "\nСумма элементов: ", min_row);
 }
+int main() {
+	int n = 2, m = 2, row_number, min_row = INT_MAX, sum;
 
+	int** a = memory_allocation(n, m);
+	Fill_array(a, n, m);
+	N_17(a, n, m, row_number, min_row, sum);
+
+	printf("%d\n" "%d\n", row_number + 1, min_row);
+	delete_Array(a, n, m);
+}
 -------------------------------------------------------------------------------------------------------------------------------------
 // №18a Транспонирование
 #include<iostream>
