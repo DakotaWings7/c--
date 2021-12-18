@@ -5,8 +5,7 @@ int** memory_allocation(int n, int m) {
 		a[i] = new int[m];
 	return a;
 }
-void Fill_array(int a[], int n) {
-	printf("Заполните массив:\n");
+void Fill_array(int a[], int n) {	
 	for (int i = 0; i < n; i++) {
 		printf("a[%d]= ", i); scanf_s("%d", &a[i]);
 	}
@@ -93,44 +92,50 @@ int main() {
 // №18a Транспонирование
 #include<iostream>
 using namespace std;
+
+void Transposition(int** a, int** a_t, int n) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++)
+			a_t[i][j] = a[j][i];
+	}
+}
+
 int main() {
-	setlocale(LC_ALL, "ru");
-	const int n = 3;
-	int arr[n][n];
-	int arr_t[n][n];
-	printf("%s" "%d" "%s" "%d:\n", "Введите матрицу размерами ", n, " на ", n);
-	
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++)
-			scanf_s("%d", &arr[i][j]);
-	}
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++)
-			arr_t[i][j] = arr[j][i];
-	}
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++)
-			printf("%d ", arr_t[i][j]);
-		printf("\n");
-	}
+	int n = 2;
+	int** a   = memory_allocation(n, n);
+	int** a_t = memory_allocation(n, n);
+
+	Fill_array(a, n, n);
+
+	Transposition(a, a_t, n);
+
+	Print_array(a, n, n);
+	printf("\n");
+	Print_array(a_t, n, n);
 }
 -------------------------------------------------------------------------------------------------------------------------------------
 // №18b Транспонирование
 #include<iostream>
 using namespace std;
-int main() {
-	setlocale(LC_ALL, "ru");
-	const int n = 3;
-	int arr[n][n];
-	printf("%s" "%d" "%s" "%d:\n", "Введите матрицу размерами ", n, " на ", n);
 
+void Transposition(int** a, int n, int m) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++)
-			scanf_s("%d", &arr[i][j]);
+			a[i][j] = a[j][i];
 	}
+}
+int main() {
+	int n = 3;
 	
+	int** a = memory_allocation(n, n);
+	Fill_array(a, n, n);
 
+	Transposition(a, n, n);
 
+	printf("\n");
+	Print_array(a, n, n);
+
+	delete_Array(a, n, n);
 }
 -------------------------------------------------------------------------------------------------------------------------------------
 // №19 элементы попарно различны
