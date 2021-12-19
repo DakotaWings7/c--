@@ -197,32 +197,46 @@ int main() {
 // №22 Дана квадратная вещественная матрица n x n
 #include<iostream>	
 using namespace std;
+
+int main_diagonal(int** a, int n, int m, int sum = 0) {
+	for (int i = 0; i < n; i++)
+		sum += a[i][i];
+	return sum;
+}
+
+int side_diagonal(int** a, int n, int m, int sum = 0) {
+	for (int i = 0; i < n; i++)
+		sum += a[i][n - 1 - i];
+	return sum;
+}
+
+int sum_over_main_diagonal(int** a, int n, int m, int sum = 0) {
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++)
+			sum += a[j][i];
+	}
+	return sum;
+}
+
+int sum_under_main_diagonal(int** a, int n, int m, int sum = 0) {
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++)
+			sum += a[i][j];
+	}
+	return sum;
+}
+
 int main() {
 	setlocale(LC_ALL, "ru");
-	const int n = 3;
-	int arr[n][n] = {0};
-	printf("%s" "%d" "%s" "%d" "%s", "Введите двумерный массив размера ", n, "x", n, ":\n");
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			scanf_s("%d", &arr[i][j]);
-		}
-	}
-	int S1 = 0, S2 = 0, S3 = 0, S4 = 0;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			if (i == j)
-				S1 += arr[i][j];
-			if (i + j == 2)
-				S2 += arr[i][j];
-			if (i > j)
-				S3 += arr[i][j];
-			if (i < j)
-				S4 += arr[i][j];
-		}
-	}
-	printf("%s" "%d" "%s", "Cумма элементов главной диагонали: ", S1, "\n");
-	printf("%s" "%d" "%s", "Cумма элементов побочной диагонали: ", S2, "\n");
-	printf("%s" "%d" "%s", "Cумма элементов ниже главной диагонали: ", S3, "\n");
-	printf("%s" "%d" "%s", "Cумма элементов выше главной диагонали: ", S4, "\n");
+	int n = 3;
+	int** a = memory_allocation(n, n);
+	Fill_array(a, n, n);
+
+	printf("%s" "%d" "%s", "Cумма элементов главной диагонали: ", main_diagonal(a, n, n), "\n");
+	printf("%s" "%d" "%s", "Cумма элементов побочной диагонали: ", side_diagonal(a, n, n), "\n");
+	printf("%s" "%d" "%s", "Cумма элементов ниже главной диагонали: ", sum_over_main_diagonal(a, n, n), "\n");
+	printf("%s" "%d" "%s", "Cумма элементов выше главной диагонали: ", sum_under_main_diagonal(a, n, n), "\n");
+
+	delete_Array(a, n, n);
 }
 -------------------------------------------------------------------------------------------------------------------------------------
