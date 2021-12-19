@@ -193,6 +193,54 @@ int main() {
 	delete_Array(a, n, m);
 }
 -------------------------------------------------------------------------------------------------------------------------------------
+// №20 Между первым совершенным и последним, арифметической прогрессией
+#include<iostream>
+using namespace std;
+
+int first_perfect_number(int* a, int n, int& first_a) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 2; j <= a[i] / 2; j++) {
+			if (a[i] % j == 0) 
+				return first_a = i;
+		}
+	}
+}
+
+void last_perfect_number(int* a, int n, int &last_a) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 2; j <= a[i] / 2; j++) {
+			if (a[i] % j == 0)
+				last_a = i;
+		}
+	}
+}
+bool Progression_checker(int* a, int first_a, int last_a) {
+	int difference = a[first_a + 1] - a[first_a + 2];
+	for (int i = first_a + 1; i < last_a - 1; i++) {
+		if (a[i] - a[i + 1] != difference)
+			return 0;
+	}
+	return 1;
+}
+int main() {
+	int n = 5;
+	int* a = new int[n];
+	Fill_array(a, n);
+	int last_a, first_a;
+
+	first_perfect_number(a, n, first_a);
+	last_perfect_number(a, n, last_a);
+	
+	if(last_a - first_a < 2) 
+		printf("There's no sequence");
+	else
+		if (Progression_checker)
+			printf("Yes\n");
+		else
+			printf("No");
+	delete[] a;
+}
+-------------------------------------------------------------------------------------------------------------------------------------
 // №22 Дана квадратная вещественная матрица n x n
 #include<iostream>	
 using namespace std;
