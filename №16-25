@@ -148,57 +148,40 @@ int main() {
 // №19 элементы попарно различны
 #include<iostream>
 using namespace std;
+
+int pair_checker_in_rows(int** a, int m, int i) {
+	for (int j = 0; j < m - 1; j++) {
+		if (a[i][j] == a[i][j + 1])
+			return 0;
+	}
+	return 1;
+}
+
+int pair_checker_in_colls(int** a, int n, int i) {
+	for (int j = 0; j < n - 1; j++) {
+		if (a[j][i] == a[j + 1][i])
+			return 0;
+	}
+	return 1;
+}
+
+void count_checker(int** a, int n, int m, int &count1, int& count2) {
+	for (int i = 0; i < n; i++) {
+		count1 += pair_checker_in_rows(a, n, i);
+		count2 += pair_checker_in_colls(a, m, i);
+	}
+}
+
 int main() {
 	setlocale(LC_ALL, "ru");
-	const int n = 3;
-	const int m = 4;
-	int arr[n][m];
-	for (int i = 0; i < n; i++) {
-		printf("%s" "%d" "%s" "%d" "%s",
-			"Введите ", i, " строку матрицы, содержащую ",
-			m, " элементов: ");
-		for (int j = 0; j < m; j++) {
-			scanf_s("%d", &arr[i][j]);
-		}
-	}
+
+	int n = 2, m = 2;
+	int** a = memory_allocation(n, m);
+	Fill_array(a, n, m);
 
 	int count1 = 0, count2 = 0;
-	bool F = 0;
-	for (int i = 0; i < n; i++) {  // поиск попарно различных в каждой строке
-		F = 0;
-		for (int j = 0; j < m - 1; j++) {
-			for (int k = j + 1; k < m; k++) {
-				if (arr[i][j] == arr[i][k]) {
-					F = 0;
-					break;
-				}
-				else
-					F = 1;
-			}
-			if (!F)
-				break;
-		}
-		if (F)
-			count1 += 1;
-	}
+	count_checker(a, n, m, count1, count2);
 
-	for (int i = 0; i < m; i++) {	// поиск попарно различных в каждом столбце
-		F = 0;
-		for (int j = 0; j < n - 1; j++) {
-			for (int k = j + 1; k < n; k++) {
-				if (arr[j][i] == arr[k][i]) {
-					F = 0;
-					break;
-				}
-				else
-					F = 1;
-			}
-			if (!F)
-				break;
-		}
-		if (F)
-			count2 += 1;
-	}
 	if (count1 > 0)
 		printf("%s" "%d\n", "Количество строк, в которых эл-ты попарно различны: ", count1);
 	else
@@ -207,8 +190,9 @@ int main() {
 		printf("%s" "%d\n", "Количество столбцов, в которых эл-ты попарно различны: ", count2);
 	else
 		printf("Таких столбцов нет\n");
-}
 
+	delete_Array(a, n, m);
+}
 -------------------------------------------------------------------------------------------------------------------------------------
 // №22 Дана квадратная вещественная матрица n x n
 #include<iostream>	
