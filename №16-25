@@ -5,9 +5,9 @@ int** memory_allocation(int n, int m) {
 		a[i] = new int[m];
 	return a;
 }
-void Fill_array(int a[], int n) {	
+void Fill_array(int* a, int n) {
 	for (int i = 0; i < n; i++) {
-		printf("a[%d]= ", i); scanf_s("%d", &a[i]);
+		printf("a[%d] = ", i); scanf_s("%d", &a[i]);
 	}
 }
 void Fill_array(int** a, int n, int m) {
@@ -241,7 +241,51 @@ int main() {
 	delete[] a;
 }
 -------------------------------------------------------------------------------------------------------------------------------------
+// №21 Скалярное произведение строки на столбец, на пересечении которых находится последний мин элемент
+#include<iostream>
+using namespace std;
 
+int last_min(int** a, int n, int m, int& x, int& y) {
+	int min = INT_MAX;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] <= min) {
+				min = a[i][j];
+				x = i; y = j;
+			}
+		}
+	}
+	return min;
+}
+int* collumn(int** a, int n, int j) {
+	int* coll = new int[n];
+	for (int i = 0; i < n; i++)
+		coll[i] = a[i][j];
+	return coll;
+}
+int scalar_product(int* a, int* b, int n) {
+	int product = 0;
+	for (int i = 0; i < n; i++)
+		product += a[i] * b[i];
+	return product;
+}
+
+int main() {
+	int n = 2;
+	int** a = memory_allocation(n, n);
+	Fill_array(a, n, n);
+
+	int x, y;
+	int mn = last_min(a, n, n, x, y);
+	int* row = a[x];
+	int* coll = collumn(a, n, y);
+
+	printf("Smallest element is %d on place %d %d\n", mn, x, y);
+	printf("scalar product of %d row and %d column is %d\n", x, y, scalar_product(row, coll, n));
+
+	delete_Array(a, n, n);
+	delete[] coll;
+}
 -------------------------------------------------------------------------------------------------------------------------------------
 // №22 Дана квадратная вещественная матрица n x n
 #include<iostream>	
