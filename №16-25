@@ -434,7 +434,7 @@ int isSorted(int* a, int n) {
 }
 
 int k_ch(int* a, int* b, int n, int m, int &k) {
-	k += isSorted(a, n) + isSorted(b, m);
+	k = isSorted(a, n) + isSorted(b, m);
 	return k;
 }
 
@@ -446,7 +446,7 @@ int main() {
 	printf("\n");
 	Fill_array(b, n);
 	
-	int k = 0;
+	int k;
 
 	printf("k is: %d", k_ch(a, b, n, m, k));
 	delete[] a;
