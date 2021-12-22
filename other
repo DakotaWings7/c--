@@ -1,46 +1,60 @@
-// убывающая последовательность
+//№кр1, произведение p=xn(xn+x(n-1))(xn+x(n-1)+x(n-2)...(xn+..+x1)
 #include<iostream>
 using namespace std;
 
 int main() {
-	setlocale(LC_ALL, "rus");
-	const int len_arr = 6;
-	int arr[len_arr] = { 0 };
-	for (int i = 0; i < len_arr; i++) {
+	const int n = 5;
+	int x[n];
+	for (int i = 0; i < n; i++)
+		scanf_s("%d", &x[i]);
+
+	int a = 0, p = 1;
+	for (int i = 0; i < n; i++) {
+		a += x[n - i - 1];
+		p *= a;
+	}
+	printf("%d", p);
+}
+
+
+//кр№1 арифметическая последовательность между первым и последним нечетным
+#include<iostream>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "ru");
+	const int n = 6;
+	int arr[n];
+	for (int i = 0; i < n; i++)
 		scanf_s("%d", &arr[i]);
-	}
 
-	int left, right;
-	bool F = 0;
-
-	for (int i = 0; i < len_arr; i++) {
-		if (arr[i] > 0) {
-			left = i;
-			i = len_arr;
+	int first, last;
+	for (int i = 0; i < n; i++) {
+		if (arr[i] % 2 != 0) {
+			first = i;
+			break;
 		}
 	}
-
-	for (int i = 0; i < len_arr; i++) {
-		if (arr[i] > 0) {
-			right = i;
-		}
+	for (int i = 0; i < n; i++) {
+		if (arr[i] % 2 != 0)
+			last = i;
 	}
 
-	if (right - left <= 2) {
+	bool F = 1;
+	if (last - first < 3)
 		printf("Между первым и последним положительными числами нет последовательности");
-	}
-	else 
-		{
-		for (int i = left + 1; i < right - 1; i++) {
-			if (arr[i] > arr[i + 1])
-				F = 1;
-			else
+	else {
+		int d = arr[first + 2] - arr[first + 1];
+		for (int i = first + 1; i < last - 2; i++) {
+			if (arr[i] + d != arr[i + 1])
 				F = 0;
 		}
-		if (F)
-			printf("Последовательность убывающая");
+		if (!F)
+			printf("Последовательность между %d и %d не является арифметической прогрессией",
+				arr[first], arr[last]);
 		else
-			printf("Последовательность не убывающая");
+			printf("Последовательность между %d и %d является арифметической прогрессией",
+				arr[first], arr[last]);
 	}
 }
 ----------------------------------------------------------------------------------------------------------------------
