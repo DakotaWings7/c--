@@ -37,7 +37,7 @@ void delete_Array(int** a, int n, int m) {
 #include<stdio.h>
 using namespace std;
 
-void Nearest_element(int a[], int n, int& m, int& diff, int& ind) {
+void Nearest_element(int* a, int n, int& m, int& diff, int& ind) {
 	for (int i = 0; i < n; i++) {
 		if (abs(a[i] - m) < diff) {
 			ind = i;
