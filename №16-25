@@ -280,7 +280,6 @@ int main() {
 	int* row = a[x];
 	int* coll = collumn(a, n, y);
 
-	printf("Smallest element is %d on place %d %d\n", mn, x, y);
 	printf("scalar product of %d row and %d column is %d\n", x, y, scalar_product(row, coll, n));
 
 	delete_Array(a, n, n);
@@ -362,7 +361,7 @@ int main() {
 	delete [] b;
 }
 -------------------------------------------------------------------------------------------------------------------------------------
-// №24 Две матрицы A, B, построить C, [i][j] = sum(elements(i)\B{j})
+// №24 Две матрицы A, B, построить C, C[i][j] = sum(elementsA(i)\B{j})
 #include<iostream>
 using namespace std;
 
