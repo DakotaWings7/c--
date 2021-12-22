@@ -415,3 +415,40 @@ int main() {
 	delete_Array(C, n, m);
 }
 -------------------------------------------------------------------------------------------------------------------------------------
+//№25 вернуть k = 2, если оба упорядочены по неубыванию, k = 1, если хотя-бы один
+#include<iostream>
+using namespace std;
+
+void Fill_array(int* a, int n) {
+	printf("Fill array[%d]:\n", n);
+	for (int i = 0; i < n; i++)
+		scanf_s("%d", &a[i]);
+}
+
+int isSorted(int* a, int n) {
+	for (int i = 0; i < n - 1; i++) {
+		if (a[i] > a[i + 1])
+			return 0;
+	}
+	return 1;
+}
+
+int k_ch(int* a, int* b, int n, int m, int &k) {
+	k += isSorted(a, n) + isSorted(b, m);
+	return k;
+}
+
+int main() {
+	int n = 4, m = 4;
+	int* a = new int[n];
+	int* b = new int[m];
+	Fill_array(a, n);
+	printf("\n");
+	Fill_array(b, n);
+	
+	int k = 0;
+
+	printf("k is: %d", k_ch(a, b, n, m, k));
+	delete[] a;
+	delete[] b;
+}
