@@ -11,19 +11,19 @@ void Fill_array(int* a, int n) {
 	}
 }
 void Fill_array(int** a, int n, int m) {
+	printf("Enter array:\n");
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			printf("a[%d][%d] = ", i, j); scanf_s("%d", &a[i][j]);
-		}
+		for (int j = 0; j < m; j++)
+			scanf_s("%d", &a[i][j]);
 	}
 }
-void Print_array(int ** a, int n, int m) {
+void Print_array(int** a, int n, int m) {
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			printf("a[%d][%d] = ", i, j);
-			printf("%d\n", a[i][j]);
-		}
+		for (int j = 0; j < m; j++)
+			printf("%d ", a[i][j]);
+		printf("\n");
 	}
+	printf("\n");
 }
 void delete_Array(int** a, int n, int m) {
 	for (int i = 0; i < n; i++) {
@@ -362,6 +362,57 @@ int main() {
 	delete [] b;
 }
 -------------------------------------------------------------------------------------------------------------------------------------
+// №24 Две матрицы A, B, построить C, [i][j] = sum(elements(i)\B{j})
+#include<iostream>
+using namespace std;
 
+void Fill_void_array(int** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			a[i][j] = 0;
+		}
+	}
+}
+
+bool Check(int** A, int** B, int n, int i, int g, int j) {
+	for (int k = 0; k < n; k++) {
+		if (A[i][g] == B[k][j])
+			return 0;
+	}
+	return 1;
+}
+
+int Fill_C_i_j(int** A, int** B, int m, int n, int i, int j) {
+	int sum = 0;
+	for (int g = 0; g < m; g++) {
+		if (Check(A, B, n, i, g, j))
+			sum += A[i][g];
+	}
+	return sum;
+}
+
+void Fill_C(int** C, int** A, int** B, int m, int n) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++)
+			C[i][j] = Fill_C_i_j(A, B, m, n, i, j);
+	}
+}
+
+int main() {
+	int n = 2, m = 2;
+	int** A = memory_allocation(n, m);
+	int** B = memory_allocation(n, m);
+	int** C = memory_allocation(n, m);
+	Fill_array(A, n, m);
+	Fill_array(B, n, m);
+	Fill_void_array(C, n, m);
+	printf("\n");
+
+	Fill_C(C, A, B, m, n);
+	Print_array(C, n, m);
+
+	delete_Array(A, n, m);
+	delete_Array(B, n, m);
+	delete_Array(C, n, m);
+}
 -------------------------------------------------------------------------------------------------------------------------------------
-
