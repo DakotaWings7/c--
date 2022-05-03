@@ -129,3 +129,76 @@ int main()
 	strcpy(str1, str2);
 	printf("%s", str1);
 }
+------------------------------------------------------------------------------------------
+// меню сортировок
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+const int N = 10;
+
+void bubbleSort(int* a)
+{
+
+}
+
+void insertionSort(int* a)
+{
+
+}
+
+void selectionSort(int* a)
+{
+
+}
+
+void quickSort(int* a)
+{
+
+}
+
+void shellSort(int* a)
+{
+
+}
+
+void standartSort(int* a)
+{
+
+}
+int main()
+{
+	int a[N];
+	for (int i = 0; i < N; i++) { printf("a[%d] = ", i); scanf_s("%d", &a[i]); }
+	
+	setlocale(LC_ALL, "ru");
+	printf("Types of sorting:\n");
+	printf("1. Bubble-sort(пузырьковая)\n2. Insertion-sort(вставками)\n3. Selection sort(выбором)\n"
+		   "4. Quick-sort (быстрая)\n5. Shell sort(Шелла)\n6. Standart sort(стандартная).\n");
+	printf("Choose one of them: ");
+	int n;
+	scanf_s("%d", &n);
+	switch(n)
+	{
+		case 1:
+			bubbleSort(a);
+			break;
+		case 2: 
+			insertionSort(a);
+			break;
+		case 3:
+			selectionSort(a);
+			break;
+		case 4:
+			quickSort(a);
+			break;
+		case 5:
+			shellSort(a);
+			break;
+		case 6:
+			standartSort(a);
+			break;
+		default: 
+			printf("There is no sort under the %d number", n);
+	}
+}
