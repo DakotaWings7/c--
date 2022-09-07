@@ -452,3 +452,106 @@ int main() {
 	delete[] a;
 	delete[] b;
 }
+
+
+----------------------------------------
+// На предприятии есть БД о сотрудниках:
+// 1) Ф.И.О (char 30);	2) год рождения; 
+// 3) Оклад float;		4) дата устройства на работу char[11];
+// 
+// Программа выводит список сотрудников, стаж которых > 20 лет
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<string.h>
+#include<iostream>
+#include<math.h>
+class Worker {
+	char* fio;
+	char born[5];
+	float salary;
+	char date_start[11];
+
+public:
+	Worker() {
+		fio = new char[20];
+		born[0] = '\0';
+		salary = 0;
+		date_start[0] = '\0';
+	}
+
+	Worker(int n) { 
+		fio = new char[n];
+		born[0] = '\0';
+		salary = 0;
+		date_start[0] = '\0';
+	}
+
+	void setFio(char* s) { strcpy(fio, s); }
+	void setBorn(char* s) { strcpy(born, s); }
+	void setSalary(float a) { salary = a; }
+	void setDate(char* s) { strcpy(date_start, s); }
+	
+	char* getFio() { return fio; }
+	char* getBorn() { return born; }
+	float getSalary() { return salary; }
+	char* getDate() { return date_start; }
+
+	void Print() {
+		printf("%s %s %f %s\n", fio, born, salary, date_start);
+	}
+
+	void Scanf() {
+		char inits[5];
+		scanf("%s%s%s%f%s", fio, inits, born, &salary, date_start);
+		strcat(fio, " ");
+		strcat(fio, inits);
+	}
+};
+
+
+int charToDays(char* str) {
+	int result = 0, i;
+	
+	while (*str != '.') {
+		i = 1;
+		result += (*str - '0') * pow(10, i);
+		str++; i--;
+	}
+
+	int month = 0;
+	while (*str != '.') {
+		 month += ;
+		 str++;
+	}
+	result += month * 31;
+	
+	int year = 0;
+	while (*str != '.') {
+		
+	}
+	return result;
+}
+
+const int DAYS_IN_YEAR = 365;
+
+int main() {
+	int i;
+	Worker base[100];
+	for ( i = 0; i < 3; i++)
+	{
+		base[i].Scanf();
+	}
+
+
+	
+	int thisDate = 7 + 9 * 31 + 2022 * DAYS_IN_YEAR;
+	int workExperience = DAYS_IN_YEAR * 20;
+	
+	for (i = 0; i < 3; i++)
+	{
+		charToDays(base[i].getDate());
+		
+	}
+	
+}
