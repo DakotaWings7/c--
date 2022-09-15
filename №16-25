@@ -455,7 +455,7 @@ int main() {
 
 
 ----------------------------------------
-// На предприятии есть БД о сотрудниках:
+//		I) На предприятии есть БД о сотрудниках:
 // 1) Ф.И.О (char 30);	2) год рождения; 
 // 3) Оклад float;		4) дата устройства на работу char[11];
 // 
@@ -466,6 +466,7 @@ int main() {
 #include<string.h>
 #include<iostream>
 #include<math.h>
+
 class Worker {
 private:
 	char* fio;
@@ -510,23 +511,32 @@ public:
 	}
 };
 
+int pow(int a, int b) {
+	int result = 1;
+	for (int i = 0; i < b; i++)	result *= a;
+	return result;
+}
+
 const int THIS_YEAR = 2022;
 
-int twentyYears(char* str) {
-	int i = 0;
-	while (i != 2)
-	{
-		if (*str == '.') i++;
-		str++;
-	}
-	int j = 3;
-	int year  = 0;
-	while (*str) {
-		year += pow(10, j) * (*str - '0');
-		str++; j--;
+int getExperience(char* str) {
+	int j = 3, k = 6;
+	int year = 0;
+	while (str[k]) {
+		year += pow(10, j) * (str[k] - '0');
+		k++; j--;
 	}
 	return THIS_YEAR - year;
 }
+
+
+
+//		II) Описать Base:
+//	Поля: массив Worker, текущая размерность, максимальная размерность
+//	Методы:
+// а) Конструкторы; б) Деструкторы; в) Создание базы из текстового файла; г) Печать базы;
+// д) Добавление в базу; е) Удаление из базы; ж) Корректировка записей; з) Копирование базы;
+// и) Увеличение памяти для базы;
 
 class Base {
 private:
@@ -544,10 +554,22 @@ public:
 		a = new Worker[max_n];
 		n = 0;
 	}
-	int getBaseFromFile(char* fname) {
+	~Base() {
+		delete[] a;
+	}
+
+	void setWorkerBase(Worker* a) { this->a = a; }
+	void setCurrentSize(int n) { this->n = n; }
+	void setMaxSize(int max_n) { this->max_n = max_n; }
+
+	Worker* getWorkerBase() { return a; }
+	int getCurrentSize() { return n; }
+	int getMaxSize() { return max_n; }
+
+	int getBaseFromFile(const char* fname) {
 		FILE* f;
-		if ((f = fopen(fname, "r")) == NULL) return 1;
-		char fio[31];
+		if((f = fopen(fname, "r")) == NULL) return 1;
+		char* fio = new char[20];
 		char born[5];
 		int salary;
 		char date_start[11];
@@ -568,25 +590,27 @@ public:
 	}
 	void PrintBase() {
 		for (int i = 0; i < n; i++)
-		{
-			a[i].Worker::Print();
-		}
+			a[i].Print();
 	}
 };
 
 int main() {
-	int i;
+	/*int i;					// Worker's experience >=- 20
 	Worker base[100];
+
 	for (i = 0; i < 3; i++)
 		base[i].Scanf();
 	
-	/*printf("-------------------------------\n");
+	printf("-------------------------------\n");
 
 	for (i = 0; i < 3; i++)
 	{
-		if (twentyYears(base[i].getDate()) >= 20) 
+		if (getExperience(base[i].getDate()) >= 20)
 			base[i].Print();
 	}*/
 
-
+	Base workersBase;
+	if (!workersBase.getBaseFromFile("1.txt"))
+		printf("Ok\n");
+	
 }
