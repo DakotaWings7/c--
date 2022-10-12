@@ -158,3 +158,87 @@ int main() {
 		printf("Ok\n");
 
 }
+----------------------------------------------------------------------
+// Описать класс Треугольник
+// массив треугольников, выяснить какой из них больше
+// вхождение треугольника в другой
+#include<iostream>
+#define _CRT_SECURE_NO_WARNINGS
+class Point {
+public:
+	float x, y;
+public:
+	Point(float x1 = 0, float y1 = 0) { 
+		x = x1;	y = y1;
+	}
+
+	void ShowPoint() { printf("%1.f %1.f", x, y); }
+	
+	void operator +=(Point& point) {
+		x = x + point.x;
+		y = y + point.y;
+	}
+};
+
+class Triangle {
+	char* name;
+	Point v1, v2, v3;
+	double a, b, c;
+public:
+	static int count;
+
+	Triangle() {
+		name = '\0';
+		Point(v1); Point(v2); Point(v3);
+		a = b = c = 0.0;
+	}
+
+	Triangle(const Point& p1, const Point& p2, const Point& p3) : v1(p1), v2(p2), v3(p3) {
+		name = new char[32];
+		sprintf(name, "Triangle %d", count); count++;
+		a = sqrt((v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y));
+		b = sqrt((v2.x - v3.x) * (v2.x - v3.x) + (v2.y - v3.y) * (v2.y - v3.y));
+		c = sqrt((v1.x - v3.x) * (v1.x - v3.x) + (v1.y - v3.y) * (v1.y - v3.y));
+	}
+
+	~Triangle() { delete[] name; }
+
+	Triangle(const Triangle& obj) {
+		strcpy(name, obj.name);
+		v1 = obj.v1; v2 = obj.v2; v3 = obj.v3;
+		a = obj.a;   b = obj.b;   c = obj.c;
+	}
+
+	void ShowTriangle() {
+		printf("%s", name);
+		printf("v1 = "); v1.ShowPoint();
+		printf("v2 = "); v2.ShowPoint();
+		printf("v3 = "); v3.ShowPoint();
+		printf("a = %1f, b = %1f, c = %1f", a, b, c);
+	}
+
+	double GetSquare()
+	{
+		double p = (a + b + c) / 2;
+		return sqrt(p * (p - a) * (p - b) * (p - c));
+	}
+
+	bool operator >(Triangle& obj) {
+		return GetSquare() > obj.GetSquare();
+	}
+
+	void Move(Point& point)
+	{
+		v1 += point;
+		v2 += point;
+		v3 += point;
+	}
+};
+
+
+
+int main() {
+	Triangle* Figures = new Triangle[3];
+
+	
+}
